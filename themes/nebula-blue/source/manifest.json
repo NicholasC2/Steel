@@ -1,0 +1,16 @@
+{
+    "name": "Nebula Blue",
+    "author": "NicholasC",
+    "version": 1,
+
+    "assets": {
+        "bg-top": {
+            "file": "bg-top.bin",
+            "screen": 0,
+            "layer": 0,
+            "x": 0,
+            "y": 0
+        },
+        "cursor": "cursor.bin"
+    }
+}
