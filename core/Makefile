@@ -1,50 +1,57 @@
 .SUFFIXES:
 
-TARGET := steel
-BUILD := build
-
-SOURCES := $(wildcard src/*.c)
-OBJECTS := $(patsubst src/%.c,$(BUILD)/%.o,$(SOURCES))
-
-CC := $(DEVKITARM)/bin/arm-none-eabi-gcc
-
-CFLAGS := \
-	-g \
-	-Wall \
-	-Wextra \
-	-O2 \
-	-ffunction-sections \
-	-fdata-sections \
-	-D__NDS__ \
-	-DARM9 \
-	-I$(DEVKITPRO)/libnds/include \
-	-I$(DEVKITPRO)/calico/include
-
-GAME_TITLE := Steel
-GAME_SUBTITLE1 := Steel
-GAME_SUBTITLE2 :=
-
-LIBS := -lnds9
+ifeq ($(strip $(DEVKITARM)),)
+$(error Please set DEVKITARM in your environment: export DEVKITARM=<path to>/devkitARM)
+endif
 
 include $(DEVKITARM)/ds_rules
 
-.PHONY: all clean
+TARGET := steel
+BUILD := build
 
-all: $(TARGET).nds
+ARCH := -march=armv5te -mtune=arm946e-s -mthumb
 
-$(TARGET).nds: $(TARGET).elf
+CFLAGS := -g -Wall -O2 -ffunction-sections -fdata-sections $(ARCH) -DARM9
+CXXFLAGS := $(CFLAGS) -fno-rtti -fno-exceptions
+CPPFLAGS := -I$(LIBNDS)/include
 
-$(TARGET).elf: $(OBJECTS)
+ASFLAGS := -g $(ARCH)
 
-$(BUILD)/%.o: src/%.c
-	@mkdir -p $(BUILD)
-	$(CC) $(CFLAGS) -MMD -MP -c $< -o $@
+LDFLAGS := -specs=ds_arm9.specs -g $(ARCH) -Wl,-Map,$(notdir $*.map)
 
--include $(OBJECTS:.o=.d)
+LIBS := -lnds9
+LIBDIRS := $(LIBNDS)
+
+ifneq ($(BUILD),$(notdir $(CURDIR)))
+
+export OUTPUT := $(CURDIR)/$(TARGET)
+export DEPSDIR := $(CURDIR)/$(BUILD)
+export LD := $(CXX)
+
+CPPFILES := $(notdir $(wildcard src/*.cpp))
+
+export VPATH := $(CURDIR)/src
+export OFILES := $(CPPFILES:.cpp=.o)
+
+export LIBPATHS := $(foreach dir,$(LIBDIRS),-L$(dir)/lib)
+
+.PHONY: $(BUILD) clean
+
+$(BUILD):
+	@mkdir -p $@
+	@$(MAKE) --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
 
 clean:
-	rm -rf $(BUILD)
-	rm -f $(TARGET).elf
-	rm -f $(TARGET).nds
-	rm -f $(TARGET).map
-	rm -f $(TARGET).lst
+	@rm -rf $(BUILD) $(TARGET).elf $(TARGET).nds $(TARGET).ds.gba
+
+else
+
+DEPENDS := $(OFILES:.o=.d)
+
+$(OUTPUT).nds: $(OUTPUT).elf
+
+$(OUTPUT).elf: $(OFILES)
+
+-include $(DEPENDS)
+
+endif

@@ -1,3 +1,8 @@
-.vscode
+.vscode/
 
-build/
+**/build/
+*.lst
+*.nds
+*.elf
+*.o
+*.d

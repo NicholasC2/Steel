@@ -1,9 +1,10 @@
 CORE := ../../core
 
+BUILD := build
 CORE_NDS := $(CORE)/steel.nds
 
 DLDI := r4tf_v2.dldi
-OUTPUT := r4-original.nds
+OUTPUT := $(BUILD)/r4-original.nds
 
 .PHONY: all clean
 
@@ -13,8 +14,10 @@ $(CORE_NDS):
 	$(MAKE) -C $(CORE)
 
 $(OUTPUT): $(CORE_NDS) $(DLDI)
+	@mkdir -p $(BUILD)
 	cp $(CORE_NDS) $@
 	dlditool $(DLDI) $@
 
 clean:
-	rm -f $(OUTPUT)
+	@rm -rf $(BUILD)
+	@rm -f $(OUTPUT)

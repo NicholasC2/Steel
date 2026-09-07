@@ -1,4 +1,6 @@
 #include <nds.h>
+#include <nds/arm9/console.h>
+#include <nds/interrupts.h>
 #include <stdio.h>
 
 int main(void)
