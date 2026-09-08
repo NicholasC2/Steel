@@ -9,6 +9,11 @@ include $(DEVKITARM)/ds_rules
 TARGET := steel
 BUILD := build
 
+# update these if ur making a fork
+GAME_TITLE := Steel
+GAME_SUBTITLE1 := by NicholasC
+GAME_SUBTITLE2 :=
+
 ARCH := -march=armv5te -mtune=arm946e-s -mthumb
 
 CFLAGS := -g -Wall -O2 -ffunction-sections -fdata-sections $(ARCH) -DARM9
