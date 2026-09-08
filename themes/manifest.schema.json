@@ -1,0 +1,87 @@
+{
+    "title": "Steel Theme",
+    "type": "object",
+
+    "required": [
+        "name",
+        "author",
+        "version"
+    ],
+
+    "properties": {
+        "name": {
+            "type": "string"
+        },
+
+        "author": {
+            "type": "string"
+        },
+
+        "version": {
+            "type": "string"
+        },
+
+        "colors": {
+            "type": "object",
+            "properties": {
+                "background": {
+                    "type": "string"
+                },
+                
+                "surface": {
+                    "type": "string"
+                },
+
+                "text": {
+                    "type": "string"
+                },
+                "text_secondary": {
+                    "type": "string"
+                },
+
+                "disabled": {
+                    "type": "string"
+                },
+
+                "accent": {
+                    "type": "string"
+                },
+
+                "border": {
+                    "type": "string"
+                },
+                "border_active": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+
+        "screens": {
+            "type": "object",
+            "properties": {
+                "top": {
+                    "$ref": "#/$defs/screen"
+                },
+                "bottom": {
+                    "$ref": "#/$defs/screen"
+                }
+            },
+            "additionalProperties": false
+        }
+    },
+
+    "$defs": {
+        "screen": {
+            "type": "object",
+            "properties": {
+                "background": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        }
+    },
+
+    "additionalProperties": false
+}
