@@ -1,0 +1,46 @@
+<theme>
+    <info
+        name="Nebula Blue"
+        author="Steel"
+        description="Default Theme"
+        version="1.0.0"
+        icon="assets/icon.png"
+    />
+
+    <top>
+        <row justify="space-between">
+            <clock />
+            <battery />
+        </row>
+
+        <calendar />
+    </top>
+
+    <bottom>
+        <navbar>
+            <navbar-item />
+        </navbar>
+
+        <menu>
+            <menu-item type="button">
+                <image source="{item.icon}" />
+                <text>{item.text}</text>
+            </menu-item>
+
+            <menu-item type="label">
+                <h3>{item.text}</h3>
+            </menu-item>
+
+            <menu-item type="input">
+                <input />
+            </menu-item>
+        </menu>
+
+        <game-list>
+            <game>
+                <image source="{game.icon}" />
+                <text>{game.name}</text>
+            </game>
+        </game-list>
+    </bottom>
+</theme>

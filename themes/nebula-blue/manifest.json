@@ -1,7 +1,0 @@
-{
-    "$schema": "../manifest.schema.json",
-
-    "name": "Nebula Blue",
-    "version": "0.1",
-    "author": "NicholasC"
-}
