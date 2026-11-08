@@ -1,0 +1,28 @@
+{
+    "env": {
+        "DEVKITPRO": "/opt/devkitpro",
+        "DEVKITARM": "/opt/devkitpro/devkitARM"
+    },
+    "configurations": [
+        {
+            "name": "devkitARM",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${env:DEVKITPRO}/libnds/include",
+                "${env:DEVKITARM}/arm-none-eabi/include",
+                "${env:DEVKITARM}/arm-none-eabi/include/c++/**",
+                "${env:DEVKITARM}/lib/gcc/arm-none-eabi/**/include",
+                "${env:DEVKITPRO}/calico/include"
+            ],
+            "defines": [
+                "ARM9",
+                "__NDS__"
+            ],
+            "compilerPath": "${env:DEVKITARM}/bin/arm-none-eabi-g++",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "gcc-arm"
+        }
+    ],
+    "version": 4
+}

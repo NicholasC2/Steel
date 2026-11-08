@@ -1,0 +1,17 @@
+.{
+    .name = .steel,
+    .version = "0.1.0",
+    .minimum_zig_version = "0.15.0-dev.1380+e98aeeb73",
+    .fingerprint = 0x8e9fe19366e27c35,
+    .dependencies = .{
+        .anne_nds_dev = .{
+            .url = "https://github.com/AnneKitsune/anne_nds_dev/archive/refs/heads/main.tar.gz",
+            .hash = "anne_nds_dev-0.2.0-Dl5WhoOlAABkvXSQ9q2g5tU5B0Qf6-3wSyhX4l3UdneE",
+        },
+    },
+    .paths = .{
+        "build.zig",
+        "build.zig.zon",
+        "src",
+    },
+}

@@ -1,4 +1,7 @@
-.vscode/
+.vscode/**
 !.vscode/c_cpp_properties.json
 
-build/
+.zig-cache/
+zig-out/
+zig-pkg/
+*.o

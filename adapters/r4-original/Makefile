@@ -1,23 +1,21 @@
-CORE := ../../core
-
-BUILD := build
-CORE_NDS := $(CORE)/steel.nds
-
-DLDI := r4tf_v2.dldi
-OUTPUT := $(BUILD)/r4-original.nds
+STEEL_DIR := ../../steel
+BUILD_DIR := build
+STEEL_NDS := $(STEEL_DIR)/steel.nds
+DLDI_FILE := adapters/r4-original/r4tf_v2.dldi
+OUTPUT_NDS := $(BUILD_DIR)/r4-original.nds
 
 .PHONY: all clean
 
-all: $(OUTPUT)
+all: $(OUTPUT_NDS)
 
-$(CORE_NDS):
-	$(MAKE) -C $(CORE)
+$(STEEL_NDS):
+	cd $(STEEL_DIR) && zig build
 
-$(OUTPUT): $(CORE_NDS) $(DLDI)
-	@mkdir -p $(BUILD)
-	cp $(CORE_NDS) $@
-	dlditool $(DLDI) $@
+$(OUTPUT_NDS): $(STEEL_NDS)
+	mkdir -p $(BUILD_DIR)
+	cp $(STEEL_NDS) $@
+	dlditool $(DLDI_FILE) $@
 
 clean:
-	@rm -rf $(BUILD)
-	@rm -f $(OUTPUT)
+	cd $(STEEL_DIR) && zig build clean
+	rm -rf $(BUILD_DIR)
