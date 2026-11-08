@@ -1,8 +1,4 @@
 .vscode/
+!.vscode/c_cpp_properties.json
 
-**/build/
-*.lst
-*.nds
-*.elf
-*.o
-*.d
+build/
